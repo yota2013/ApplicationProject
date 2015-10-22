@@ -1,4 +1,4 @@
-
+5
 *title
 ;タイトル画面
 [bg_new name="background" layer="background" storage="title"]
