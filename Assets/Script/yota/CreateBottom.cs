@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using Novel;
 //Canavas に setting
 
 public class CreateBottom : MonoBehaviour {
@@ -24,22 +25,32 @@ public class CreateBottom : MonoBehaviour {
 	{
 		SetTextList ();
 		BottomPut();
+
 	}
 
+	void MoveScene(RectTransform obj,int scnarioNumber)
+	{
+		Button button = obj.GetComponent<Button> ();
 
+		button.onClick.AddListener (() => {
+			NovelSingleton.StatusManager.callJoker("wide/scene"+ scnarioNumber,"");
+
+		});
+	}
 
 	public void BottomPut()
 	{
 
-		for(int i=0; i < _chapternum; i++)
+		for(int i=1; i <= _chapternum; i++)
 		{
-			RectTransform ChapterBttom = GameObject.Instantiate(_prefab) as RectTransform;
-			ChapterBttom.SetParent(transform, false);
-			var text = ChapterBttom.GetComponentInChildren<Text>();
+			RectTransform ChapterButton = GameObject.Instantiate(_prefab) as RectTransform;
+			ChapterButton.SetParent(transform, false);
+			var text = ChapterButton.GetComponentInChildren<Text>();
 			text.text = "item:" + _chapterFile[i].ToString();
+			MoveScene (ChapterButton,i);
 		}
-
 	}
+
 
 
 	void ParentCanvasSet(GameObject childobj)
