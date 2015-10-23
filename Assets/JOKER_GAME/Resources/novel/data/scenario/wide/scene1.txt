@@ -39,6 +39,9 @@
 来てみたものの、、、、[p]
 誰もいないな。。。。[l]どうしようか。[p]
 
+;これでシーン戻る
+[scene file="Home"]
+
 [autosave]
 
 [select_new text="帰る" target=*select_a1 ]
