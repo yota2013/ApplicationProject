@@ -22,26 +22,32 @@ public class FileReadList{
 	//Read text
 	public void ReadFile(string Filename){
 		// FileReadTest.txtファイルを読み込む
-		FileInfo fi = new FileInfo (Application.dataPath + "/Scnario/" + Filename);
-		Debug.Log (fi);
-		try {
-			// 一行毎読み込み
-			using (StreamReader sr = new StreamReader (fi.OpenRead (), Encoding.UTF8)) {
-				int i = 0;
-				while (sr.EndOfStream == false) {
-					_guitxt.Add(sr.ReadLine().ToString());
-				}	
-			}
-		} catch (Exception e) {
-			// 改行コード 例外
-			Debug.Log (_guitxt);
-			_guitxt.Add(SetDefaultText ());
-		}
-	}
 
+		//FileInfo fi = new FileInfo ("jar:file://" + Application.dataPath + "!/assets/Scnario/" + Filename);
+		//FileInfo fi = new FileInfo (Application.dataPath + "/Scnario/" + Filename);
+		TextAsset fi = Resources.Load("Scnario/" + Filename) as TextAsset;
+		Debug.Log (fi);
+		string[] linesFromfile = fi.text.Split('\n');
+	
+		foreach (string textfile in linesFromfile)
+		{
+			Debug.Log(textfile);
+			if (textfile != null) {
+				_guitxt.Add (textfile);
+			} 
+			else 
+			{
+				Debug.Log (_guitxt);
+				_guitxt.Add(SetDefaultText ());
+			}
+		}
+
+	}
 	// 改行コード処理
 	string SetDefaultText(){
 		return "C#あ\n";
 	}
+
+		
 
 }

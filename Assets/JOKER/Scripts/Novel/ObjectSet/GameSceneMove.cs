@@ -7,9 +7,10 @@ public class GameSceneMove : MonoBehaviour {
 	{
 		Application.LoadLevel(name);
 	}
-
-	void GameFinish()
+	//起動出来た
+	public void GameFinish()
 	{
 		Application.Quit();
+		Debug.Log ("オワリ");
 	}
 }

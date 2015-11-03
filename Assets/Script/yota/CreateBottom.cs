@@ -16,7 +16,7 @@ public class CreateBottom : MonoBehaviour {
 	void SetTextList()
 	{
 		FileReadList chapterlist = new FileReadList ();
-		chapterlist.ReadFile ("Test.txt");
+		chapterlist.ReadFile ("Test");
 		_chapterFile = chapterlist.Guitxt;
 		_CHAPTRNUM = _chapterFile.Count;
 	}
