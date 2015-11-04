@@ -40,7 +40,7 @@
 誰もいないな。。。。[l]どうしようか。[p]
 
 ;これでシーン戻る
-[scene file="Home"]
+;[scene file="Home"]
 
 [autosave]
 

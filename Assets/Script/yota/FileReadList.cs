@@ -22,9 +22,6 @@ public class FileReadList{
 	//Read text
 	public void ReadFile(string Filename){
 		// FileReadTest.txtファイルを読み込む
-
-		//FileInfo fi = new FileInfo ("jar:file://" + Application.dataPath + "!/assets/Scnario/" + Filename);
-		//FileInfo fi = new FileInfo (Application.dataPath + "/Scnario/" + Filename);
 		TextAsset fi = Resources.Load("Scnario/" + Filename) as TextAsset;
 		Debug.Log (fi);
 		string[] linesFromfile = fi.text.Split('\n');
