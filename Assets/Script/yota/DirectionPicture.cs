@@ -49,7 +49,6 @@ public class DirectionPicture : MonoBehaviour {
 		{
 			CreateDirectionObject (e.Direction.ToString ());
 		}
-
 	}
 
 
@@ -59,6 +58,7 @@ public class DirectionPicture : MonoBehaviour {
 		{
 			return false;
 		}
+
 		return true;
 	}
 

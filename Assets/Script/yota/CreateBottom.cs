@@ -47,7 +47,7 @@ public class CreateBottom : MonoBehaviour {
 			RectTransform ChapterButton = GameObject.Instantiate(_prefab) as RectTransform;
 			ChapterButton.SetParent(transform, false);
 			var text = ChapterButton.GetComponentInChildren<Text>();
-			text.text = "item:" + _chapterFile[i].ToString();
+			text.text = (i+1).ToString() +"章:" + _chapterFile[i].ToString();
 			MoveScene (ChapterButton,i+1);
 		}
 	}
