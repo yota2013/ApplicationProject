@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameFinishSecene : MonoBehaviour {
+public class GameMoveSecene : MonoBehaviour {
 
 	public void SceneMove(string name)
 	{
