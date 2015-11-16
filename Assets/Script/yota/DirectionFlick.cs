@@ -10,12 +10,15 @@ public class DirectionFlick : MonoBehaviour {
 	private List<string> OnceArrow = new List<string>();
 	private int _number = 0;
 	[SerializeField] Text _debug;
+	private CreateDirection _Direction;
+
 
 	void OnEnable ()
 	{
 		TouchManager.Instance.FlickComplete += OnFlickComplete;
 	}
-	void OnDisable ()
+
+	void OnDisable() 
 	{
 		TouchManager.Instance.FlickComplete -= OnFlickComplete;
 	}
@@ -54,7 +57,7 @@ public class DirectionFlick : MonoBehaviour {
 	private void CorrentAnswer(string Direction)
 	{
 		//受け渡しできた
-		OnceArrow  = CreateDirection.Instance.GetOnceArrow ();
+		OnceArrow  = _Direction.GetOnceArrow();
 		if (OnceArrow[_number] == Direction) {
 			Debug.Log ("true");
 			_number++;
@@ -63,6 +66,7 @@ public class DirectionFlick : MonoBehaviour {
 		{
 			Debug.Log("false");
 			_number = 0;
+
 		}
 	}
 
@@ -79,6 +83,10 @@ public class DirectionFlick : MonoBehaviour {
 	void Start()
 	{
 		_debug.text = "オワリ";
+		_Direction = gameObject.GetComponent<CreateDirection> ();
+		_Direction.ArrowPlay (3,0.5f);
 	}
+
+
 
 }

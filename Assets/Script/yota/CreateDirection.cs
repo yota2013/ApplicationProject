@@ -3,45 +3,14 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class CreateDirection : SingletonMonoBehavior<CreateDirection> {
+//関数を呼び出せば，1ゲームプレイされるようにする．
+
+public class CreateDirection : MonoBehaviour {
 	//表示が何かを返すクラス
 	private Sprite[] _arrow;
 	private Sprite _NowArrow;
 	private List<string> OnceArrow = new List<string>();
-	int i = 0;
 	private Animator _anim;
-
-	IEnumerator mainLoop(int loop){
-		int i = 0;
-		while ( i < loop) {
-			_anim.SetBool ("action",true);
-			yield return new WaitForSeconds (0.7f);
-			SpriteChoose ();
-			i++;
-			_anim.SetBool ("action",false);
-			yield return new WaitForSeconds (1f);
-		}
-		_anim.SetBool ("action",true);
-	}
-
-	// Use this for initialization
-	void Awake()
-	{
-		_arrow = Resources.LoadAll<Sprite> ("Picture/Arrow/");
-
-	}
-
-	void Start () {
-		_anim = GetComponent<Animator>();
-		StartCoroutine (mainLoop(3));
-		//_NowArrow = gameObject.GetComponent<Image> ().sprite;
-	}
-		
-	public List<string> GetOnceArrow()
-	{
-		return OnceArrow;
-	}
-
 
 	//ランダム関数作成
 	//sprite で出力する．
@@ -49,6 +18,7 @@ public class CreateDirection : SingletonMonoBehavior<CreateDirection> {
 	{
 		return _arrow[Random.Range(0,_arrow.Length)];
 	}
+
 	//スプライト変更
 	void SpriteChange()
 	{
@@ -58,12 +28,57 @@ public class CreateDirection : SingletonMonoBehavior<CreateDirection> {
 		}
 	}
 
+	//スプライトをランダムで選択して変更する
 	void SpriteChoose()
 	{
 		_NowArrow = RandomString ();
-		OnceArrow.Add(_NowArrow.name);
+		OnceArrow.Add (_NowArrow.name);
 		SpriteChange ();
-		Debug.Log (OnceArrow [i++]);
+	}
+
+	IEnumerator MainPlay(int loop,float WaitTime){
+		int i = 0;
+		while ( i < loop) {
+			_anim.SetBool ("action",true);
+			//o.7
+			yield return new WaitForSeconds (WaitTime);
+			SpriteChoose ();
+			i++;
+			_anim.SetBool ("action",false);
+			//1.0
+			yield return new WaitForSeconds (WaitTime);
+		}
+		_anim.SetBool ("action",true);
+	}
+
+
+
+	public void ArrowPlay(int times,float WaitTime)
+	{
+		StartCoroutine (MainPlay(times,WaitTime));
+	}
+
+
+	// Use this for initialization
+
+	void Awake()
+	{
+		_arrow = Resources.LoadAll<Sprite> ("Picture/Arrow/");
+		_anim = GetComponent<Animator>();
+	}
+
+	void Start () {
+		//StartCoroutine (mainLoop(_Arrowroll));
+	}
+
+	public List<string> GetOnceArrow()
+	{
+		return OnceArrow;
+	}
+
+	public void RemoveOneceArrow()
+	{
+		 OnceArrow.Clear ();
 	}
 
 }
