@@ -50,6 +50,7 @@ public class CreateBottom : MonoBehaviour {
 			text.text = (i+1).ToString() +"章:" + _chapterFile[i].ToString();
 			MoveScene (ChapterButton,i+1);
 		}
+
 	}
 
 

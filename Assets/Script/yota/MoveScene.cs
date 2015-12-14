@@ -15,7 +15,6 @@ public class MoveScene : MonoBehaviour {
 		button.onClick.AddListener (() => {
 
 			NovelSingleton.StatusManager.callJoker("wide/"+_scenarioName,"");
-
 		});
 
 	}

@@ -11,7 +11,7 @@ public class DirectionFlick : MonoBehaviour {
 	private int _number = 0;
 	[SerializeField] Text _debug;
 	private CreateDirection _Direction;
-
+	private float DEFALUTTIMES = 0.5f;
 
 	void OnEnable ()
 	{
@@ -33,15 +33,15 @@ public class DirectionFlick : MonoBehaviour {
 		});
 
 		_debug.text = e.Direction.ToString ();
-		Debug.Log (e.Direction.ToString());
 
-		if (IsDirection (e.Direction.ToString ())&&OnceArrow != null) 
+		if(_Direction.IsFlick != true)//矢印が出ている状況にあるかどうか
+		{
+			Debug.Log ("入力出来ないよ");
+		}
+		else if (IsDirection (e.Direction.ToString ())&&OnceArrow != null) 
 		{
 			CorrentAnswer (e.Direction.ToString ());
-
 		}
-
-
 	}
 
 	public bool IsDirection (string Direction)
@@ -53,38 +53,51 @@ public class DirectionFlick : MonoBehaviour {
 		return true;
 	}
 
+
 	//nameでSpriteの名前を取得できる．
 	private void CorrentAnswer(string Direction)
 	{
 		//受け渡しできた
-		OnceArrow  = _Direction.GetOnceArrow();
+		OnceArrow  = _Direction.OnceArrow;
 		if (OnceArrow[_number] == Direction) {
 			Debug.Log ("true");
 			_number++;
-			Corrent (_number);
-		} else
-		{
-			Debug.Log("false");
-			_number = 0;
+			CorrentLastNum(_number);
 
+		} 
+		else
+		{
+			//間違ったときの判定
+			Debug.Log("false");
+			//Finish判定をここ入れる．
+			_number = 0;
+			ArrowPlays(3);
 		}
 	}
 
-	void Corrent(int NumberDirection)
+	//正解かどうかの関数
+	void CorrentLastNum(int NumberDirection)
 	{
 		if(NumberDirection == OnceArrow.Count)
 		{
-			Application.Quit ();
+			//Application.Quit ();
+			ArrowPlays(3);
 			Debug.Log ("OK");
+			_number = 0;
 		}
 		Debug.Log (_number);
+	}
+
+	void ArrowPlays(int times)
+	{
+		_Direction.ArrowPlay (times,DEFALUTTIMES);
 	}
 
 	void Start()
 	{
 		_debug.text = "オワリ";
 		_Direction = gameObject.GetComponent<CreateDirection> ();
-		_Direction.ArrowPlay (3,0.5f);
+		ArrowPlays(3);
 	}
 
 

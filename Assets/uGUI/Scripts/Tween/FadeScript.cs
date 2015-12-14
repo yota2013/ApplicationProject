@@ -5,7 +5,7 @@ using System.Collections;
 
 namespace uTools {
 	[AddComponentMenu("uTools/Internal/Play Tween(uTools)")]
-	public class uPlayTween : MonoBehaviour, uIPointHandler {
+	public class FadeTween : MonoBehaviour, uIPointHandler {
 		public uTweener tweenTarget;
 		public PlayDirection playDirection = PlayDirection.Forward;
 		public Trigger trigger = Trigger.OnPointerClick;
@@ -43,21 +43,14 @@ namespace uTools {
 			}
 		}
 
-		public void PlayFoward() {
-
-			tweenTarget.Toggle();
-		}
 		/// <summary>
 		/// Play this instance.
 		/// </summary>
 		private void Play() {
-
 			if (playDirection == PlayDirection.Toggle) {
 				tweenTarget.Toggle();
 			}
-			else {
-				tweenTarget.Play(playDirection);
-			}
+		
 		}
 
 	}

@@ -9,8 +9,22 @@ public class CreateDirection : MonoBehaviour {
 	//表示が何かを返すクラス
 	private Sprite[] _arrow;
 	private Sprite _NowArrow;
-	private List<string> OnceArrow = new List<string>();
+	private List<string> _OnceArrow = new List<string>();
 	private Animator _anim;
+	private bool _IsFlick;
+
+	public bool IsFlick
+	{
+		set{this._IsFlick = value;}
+		get{return this._IsFlick;}
+	}
+
+	public List<string> OnceArrow
+	{
+		get{return this._OnceArrow;}
+	}
+
+
 
 	//ランダム関数作成
 	//sprite で出力する．
@@ -32,12 +46,17 @@ public class CreateDirection : MonoBehaviour {
 	void SpriteChoose()
 	{
 		_NowArrow = RandomString ();
-		OnceArrow.Add (_NowArrow.name);
+		_OnceArrow.Add (_NowArrow.name);
 		SpriteChange ();
 	}
 
+
+
 	IEnumerator MainPlay(int loop,float WaitTime){
 		int i = 0;
+		IsFlick = false;
+		yield return new WaitForSeconds (WaitTime);
+
 		while ( i < loop) {
 			_anim.SetBool ("action",true);
 			//o.7
@@ -48,9 +67,10 @@ public class CreateDirection : MonoBehaviour {
 			//1.0
 			yield return new WaitForSeconds (WaitTime);
 		}
+		IsFlick = true;
 		_anim.SetBool ("action",true);
-	}
 
+	}
 
 
 	public void ArrowPlay(int times,float WaitTime)
@@ -71,14 +91,11 @@ public class CreateDirection : MonoBehaviour {
 		//StartCoroutine (mainLoop(_Arrowroll));
 	}
 
-	public List<string> GetOnceArrow()
-	{
-		return OnceArrow;
-	}
+
 
 	public void RemoveOneceArrow()
 	{
-		 OnceArrow.Clear ();
+		_OnceArrow.Clear ();
 	}
 
 }
