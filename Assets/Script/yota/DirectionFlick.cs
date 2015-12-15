@@ -13,6 +13,9 @@ public class DirectionFlick : MonoBehaviour {
 	private CreateDirection _Direction;
 	private float DEFALUTTIMES = 0.5f;
 
+
+
+
 	void OnEnable ()
 	{
 		TouchManager.Instance.FlickComplete += OnFlickComplete;
@@ -53,7 +56,11 @@ public class DirectionFlick : MonoBehaviour {
 		return true;
 	}
 
-
+	IEnumerator WaitTime(float time)
+	{
+		yield return new WaitForSeconds (time);
+	}
+		
 	//nameでSpriteの名前を取得できる．
 	private void CorrentAnswer(string Direction)
 	{
@@ -63,7 +70,6 @@ public class DirectionFlick : MonoBehaviour {
 			Debug.Log ("true");
 			_number++;
 			CorrentLastNum(_number);
-
 		} 
 		else
 		{
@@ -71,6 +77,8 @@ public class DirectionFlick : MonoBehaviour {
 			Debug.Log("false");
 			//Finish判定をここ入れる．
 			_number = 0;
+			//ここに✕判定する
+			StartCoroutine (WaitTime(1.0f));
 			ArrowPlays(3);
 		}
 	}
@@ -81,6 +89,7 @@ public class DirectionFlick : MonoBehaviour {
 		if(NumberDirection == OnceArrow.Count)
 		{
 			//Application.Quit ();
+			StartCoroutine (WaitTime(1.0f));
 			ArrowPlays(3);
 			Debug.Log ("OK");
 			_number = 0;

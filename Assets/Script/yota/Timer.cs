@@ -12,8 +12,9 @@ public class Timer : MonoBehaviour {
 	[SerializeField] GameObject Arrow;
 	private Text TimerText;
 	public float CurrentTime{ private set; get;}
-	private float limitTime = 50f;
+	private float limitTime = 20f;
 	private bool isEnable = false;
+	public GameObject Temp;
 
 	public bool IsEnable {
 		get {
@@ -40,6 +41,7 @@ public class Timer : MonoBehaviour {
 		Flickinfo = Arrow.GetComponent<DirectionFlick>();
 		TimerSet (limitTime);
 		CurrentTime = limitTime;
+		//Temp.GetComponent<Text> ().text = Temp.GetComponent<DirectionFlick>;
 	}
 	
 	// Update is called once per frame
@@ -50,9 +52,8 @@ public class Timer : MonoBehaviour {
 				Debug.Log (CurrentTime);
 				TimerSet (CurrentTime);
 				 if (CurrentTime <= 0f) {
-					Curtainprefab.GetComponent<Animator> ().SetBool ("Trigger",true);
 					//ここに終了する関数
-					//		return true;
+					Curtainprefab.GetComponent<Animator> ().SetBool ("Trigger",true);
 				}
 				//			return false;
 			}
