@@ -55,8 +55,7 @@ public class CreateDirection : MonoBehaviour {
 	IEnumerator MainPlay(int loop,float WaitTime){
 		int i = 0;
 		IsFlick = false;
-		yield return new WaitForSeconds (WaitTime);
-
+		yield return new WaitForSeconds (WaitTime+ 1f);
 		while ( i < loop) {
 			_anim.SetBool ("action",true);
 			//o.7

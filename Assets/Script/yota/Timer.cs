@@ -14,7 +14,6 @@ public class Timer : MonoBehaviour {
 	public float CurrentTime{ private set; get;}
 	private float limitTime = 20f;
 	private bool isEnable = false;
-	public GameObject Temp;
 
 	public bool IsEnable {
 		get {

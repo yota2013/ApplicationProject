@@ -12,9 +12,13 @@ public class DirectionFlick : MonoBehaviour {
 	[SerializeField] Text _debug;
 	private CreateDirection _Direction;
 	private float DEFALUTTIMES = 0.5f;
+	[SerializeField] GameObject SuccesCount;
 
 
-
+	void NumOfTimeIncliment()
+	{
+		SuccesCount.GetComponent<NumberOfTimesCounts> ().InclementNum ();	
+	}
 
 	void OnEnable ()
 	{
@@ -56,10 +60,6 @@ public class DirectionFlick : MonoBehaviour {
 		return true;
 	}
 
-	IEnumerator WaitTime(float time)
-	{
-		yield return new WaitForSeconds (time);
-	}
 		
 	//nameでSpriteの名前を取得できる．
 	private void CorrentAnswer(string Direction)
@@ -78,7 +78,7 @@ public class DirectionFlick : MonoBehaviour {
 			//Finish判定をここ入れる．
 			_number = 0;
 			//ここに✕判定する
-			StartCoroutine (WaitTime(1.0f));
+			_Direction.RemoveOneceArrow ();
 			ArrowPlays(3);
 		}
 	}
@@ -89,10 +89,12 @@ public class DirectionFlick : MonoBehaviour {
 		if(NumberDirection == OnceArrow.Count)
 		{
 			//Application.Quit ();
-			StartCoroutine (WaitTime(1.0f));
+			NumOfTimeIncliment ();
+			_Direction.RemoveOneceArrow ();
 			ArrowPlays(3);
 			Debug.Log ("OK");
 			_number = 0;
+
 		}
 		Debug.Log (_number);
 	}
@@ -108,7 +110,5 @@ public class DirectionFlick : MonoBehaviour {
 		_Direction = gameObject.GetComponent<CreateDirection> ();
 		ArrowPlays(3);
 	}
-
-
 
 }
